@@ -37,19 +37,20 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         Move();
-        CamLook();
+        CamLock();
         
         if(Input.GetButton("Fire1"))
         {
             if(weapon.CanShoot())
                 weapon.Shoot();
         }
+         if(Input.GetButtonDown("Jump"))
+            Jump();
     }
 
     void FixedUpdate()
     {
-        if(Input.GetButtonDown("Jump"))
-            Jump();
+       
     }
     void Move()
     {
@@ -57,11 +58,14 @@ public class PlayerControl : MonoBehaviour
         float z = Input.GetAxis("Vertical") * moveSpeed;
 
         // rb.velocity = new Vector3(x, rb.velocity.y, z);
+        // Move with Camera+Direction
         Vector3 dir = transform.right * x + transform.forward * z;
         rb.velocity = dir;
+        // Jump With Direction
+        dir.y = rb.velocity.y;
     }
 
-    void CamLook()
+    void CamLock()
     {
         float y =Input.GetAxis("Mouse X") * lookSensitivity;
         rotX += Input.GetAxis("Mouse Y") * lookSensitivity;

@@ -16,7 +16,9 @@ public class WeaponReady : MonoBehaviour
 
     void Awake()
     {
-        if(GetComponent<isPlayer>())
+        Cursor.lockState = CursorLockMode.Locked;
+
+        if(GetComponent<PlayerControl>())
             isPlayer = true;
     }
 
@@ -34,7 +36,7 @@ public class WeaponReady : MonoBehaviour
 
     public void Shoot()
     {
-        lastShootTime = lastShootTime.time;
+        lastShootTime = Time.time;
         curAmmo--;
 
         GameObject bullet = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
