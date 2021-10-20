@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class WeaponReady : MonoBehaviour
 {
-    public GameObject bulletPrefab;
+    // public GameObject bulletPrefab;
+    public ObjectPools bulletPool;
     public Transform muzzle;
     public int curAmmo;
     public int maxAmmo;
@@ -39,7 +40,11 @@ public class WeaponReady : MonoBehaviour
         lastShootTime = Time.time;
         curAmmo--;
 
-        GameObject bullet = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
+        //GameObject bullet = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
+        GameObject bullet = bulletPool.GetObject();
+        bullet.transform.position = muzzle.position;
+        bullet.transform.rotation = muzzle.rotation;
+
         bullet.GetComponent<Rigidbody>().velocity = muzzle.forward * bulletSpeed;
     }
 
