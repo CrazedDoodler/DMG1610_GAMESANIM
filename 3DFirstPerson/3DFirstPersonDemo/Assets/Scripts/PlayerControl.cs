@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    [Header("Stats")]
+
     public float moveSpeed;
     public float jumpForce;
+    public int curHP;
+    public int maxHP;
+    [Header("Mouse Look")]
     public float lookSensitivity;
     public float maxLookX;
     public float minLookX;
@@ -81,6 +86,19 @@ public class PlayerControl : MonoBehaviour
 
         if(Physics.Raycast(ray, 1.1f))
             rb.AddForce (Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        curHP -= damage;
+
+        if(curHP <= 0)
+            Death();
+    }
+
+    void Death()
+    {
+        
     }
 }
 
