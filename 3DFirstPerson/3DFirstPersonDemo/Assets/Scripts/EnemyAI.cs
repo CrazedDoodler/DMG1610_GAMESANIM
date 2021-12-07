@@ -22,6 +22,8 @@ public class EnemyAI : MonoBehaviour
         weapon = GetComponent<WeaponReady>();
         target = FindObjectOfType<PlayerControl>().gameObject;
         InvokeRepeating("UpdatePath", 0.0f, 0.5f);
+
+        curHP = maxHP;
     }
 
     void UpdatePath()
@@ -53,6 +55,7 @@ public class EnemyAI : MonoBehaviour
 
     void Death()
     {
+        GameManager.instance.AddScore(scoreToGive);
         Destroy(gameObject);
     }
 
